@@ -1,0 +1,13 @@
+/build*
+/debian
+/obj-*
+/package/conan/test_package/build*
+pkg
+*.kdev4
+*~
+*.kate-swp
+*.pkg.tar.xz
+CMakeLists.txt.user*
+.DS_Store
+*.swp
+*~
