@@ -156,7 +156,7 @@ class CorradeConan(conan_build_helper.CMakePackage):
     def copytree(self, src, dst, symlinks=False, ignore=None):
         if not os.path.exists(dst):
             os.makedirs(dst)
-        ignore_list = ['.travis.yml']
+        ignore_list = ['.travis.yml', '.git', '.make', '.o', '.obj', '.marks', '.internal', 'CMakeFiles', 'CMakeCache']
         for item in os.listdir(src):
             if item not in ignore_list:
               s = os.path.join(src, item)
