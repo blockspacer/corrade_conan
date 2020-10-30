@@ -62,7 +62,7 @@ class CorradeConan(conan_build_helper.CMakePackage):
     author = "helmesjo <helmesjo@gmail.com>"
     license = "MIT"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
     exports = ["COPYING"]
-    exports_sources = ["CMakeLists.txt", "src/*", "package/conan/*", "modules/*"]
+    exports_sources = ["CMakeLists.txt", "src/*", "package/**", "modules/*"]
     generators = "cmake"
     short_paths = True  # Some folders go out of the 260 chars path length scope (windows)
 
@@ -180,6 +180,9 @@ class CorradeConan(conan_build_helper.CMakePackage):
         # Wrap the original CMake file to call conan_basic_setup
         shutil.move("CMakeLists.txt", "CMakeListsOriginal.txt")
         shutil.move(os.path.join("package", "conan", "CMakeLists.txt"), "CMakeLists.txt")
+        # Replace GrowableArray.h
+        shutil.move(os.path.join("src", "Corrade", "Containers","GrowableArray.h"), os.path.join("src", "Corrade", "Containers","GrowableArrayOriginal.h"))
+        shutil.move(os.path.join("package", "src", "Corrade", "Containers","GrowableArray.h"), os.path.join("src", "Corrade", "Containers","GrowableArray.h"))
 
     def _configure_cmake(self):
         cmake = CMake(self)
