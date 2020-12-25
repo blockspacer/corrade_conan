@@ -21,6 +21,9 @@ GIT_SSL_NO_VERIFY=true \
       -s llvm_tools:build_type=Release \
       --profile clang \
           -o corrade:shared=False
+
+# clean build cache
+conan remove "*" --build --force
 ```
 
 ## HOW TO BUILD WITH SANITIZERS ENABLED
@@ -75,4 +78,7 @@ unset CFLAGS
 unset CXXFLAGS
 
 NOTE: during compilation conan will print `llvm_tools_ROOT =`. Make sure its path matches `$CC` and `$CXX`.
+
+# clean build cache
+conan remove "*" --build --force
 ```
