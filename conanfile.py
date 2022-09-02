@@ -229,13 +229,15 @@ class CorradeConan(conan_build_helper.CMakePackage):
         return cmake
 
     def build(self):
-        cmake = self._configure_cmake()
-        cmake.build()
+        with tools.vcvars(self.settings, only_diff=False): # https://github.com/conan-io/conan/issues/6577
+            cmake = self._configure_cmake()
+            cmake.build()
 
     def package(self):
-        self.copy("COPYING", dst="licenses", src=".")
-        cmake = self._configure_cmake()
-        cmake.install()
+        with tools.vcvars(self.settings, only_diff=False): # https://github.com/conan-io/conan/issues/6577
+            self.copy("COPYING", dst="licenses", src=".")
+            cmake = self._configure_cmake()
+            cmake.install()
 
     def package_info(self):
         # See dependency order here: https://doc.magnum.graphics/magnum/custom-buildsystems.html
